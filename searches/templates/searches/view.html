@@ -1,0 +1,72 @@
+{% extends "starter.html" %}
+
+{% if query %}
+
+
+
+{% endif %}
+
+{% block content %}
+<div class="row">
+<div class="col-12 col-8 mx-auto">
+<div class="container overflow-hidden text-center" style="visibility:hidden;">
+  <div class="row gy-5">
+    <div class="col-6">
+      <div class="p-3">Custom column padding</div>
+    </div>
+    <div class="col-6">
+      <div class="p-3">Custom column padding</div>
+    </div>
+    </div>
+</div>
+
+<div class="container">
+{% if query %}
+
+<p class="lead text-white fs-4">You searched for <strong class="text-primary">{{query}}</strong></p>
+
+
+ 
+    
+{% endif %}
+</div>
+
+{% for  blog_item in blog_list %}
+
+{% include 'blog/list-inline.html' with blog_post=blog_item truncate=True detail=False %} 
+
+{% empty %}
+
+
+<div class="grid text-center">
+  <div class="g-col-4"></div>
+  <div class="container overflow-hidden text-center" style="visibility:hidden;">
+    <div class="row gy-5">
+      <div class="col-6">
+        <div class="p-3">Custom column padding</div>
+      </div>
+      <div class="col-6">
+        <div class="p-3">Custom column padding</div>
+      </div>
+      </div>
+  </div>
+  <div class="g-col-4">
+    <p class="text-white"> <strong class="text-primary">{{query}}</strong> not found</p>
+  </div>
+  <div class="g-col-4"></div>
+</div>
+
+{% endfor %}
+
+
+
+
+
+
+</div>
+
+</div>
+
+
+
+{% endblock %}
