@@ -228,13 +228,13 @@ BOOTSTRAP5 = {
 
 
 
-CSRF_TRUSTED_ORIGINS = ['https://screecherweb.up.railway.app',"http://127.0.0.1:8000"]
+CSRF_TRUSTED_ORIGINS = ['https://screecher-blog-644561da5d94.herokuapp.com',"http://127.0.0.1:8000"]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 CORS_ALLOWED_ORIGINS = [
-   "https://screecherweb.up.railway.app",
+   "https://screecher-blog-644561da5d94.herokuapp.com",
     "http://127.0.0.1:8000",
 ]
 
