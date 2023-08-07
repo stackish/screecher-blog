@@ -31,8 +31,9 @@ ALLOWED_HOSTS = ['screecher-blog-644561da5d94.herokuapp.com','192.168.43.1','127
 # Application definition
 
 INSTALLED_APPS = [
-    'rest_framework',
     'jazzmin',
+    'rest_framework',
+    
 	'django.contrib.humanize',
 	'searches.apps.SearchesConfig',
 	'blog.apps.BlogConfig',
