@@ -1,0 +1,198 @@
+{% extends "starter.html" %}
+{% block title %}{{title|title}}{% endblock %}
+{% load static %}
+
+
+
+
+
+
+{% block content %}
+
+
+
+
+<div class="container overflow-hidden text-center" style="visibility:hidden;">
+  <div class="row gy-5">
+    <div class="col-6">
+      <div class="p-3">Custom column padding</div>
+    </div>
+    <div class="col-6">
+      <div class="p-3">Custom column padding</div>
+    </div>
+    </div>
+</div>
+
+
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="updatemessage" tabindex="-1" aria-labelledby="updatemessageLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-dark site" id="updatemessageLabel">Perfect!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <div class="text-center text-success mt-3">
+        <i class="far fa-check-circle fa-6x" style="color: #a5dc86;"></i>
+        </div>
+        <br>
+        <div class="mb-3 text-dark carousel-p target articles"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" style="width:65px;" data-bs-dismiss="modal">Close</button>
+       
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+
+<!--Job opportunities-->
+  <div class="ui one column grid">
+    <div class="column">
+      <div class="ui raised segment">
+        <a class="ui orange ribbon label" style="cursor: default;">Job Opportunities</a>
+      
+        <p></p>
+        
+      </div>
+    </div>
+   
+  </div>
+
+
+  {% include 'human_resource/index.html' with truncate=True %}
+
+ 
+
+
+
+
+
+  <div class="row gy-5" style="visibility: hidden;">
+    <div class="col-6">
+      <div class="p-3">Custom column padding</div>
+    </div>
+  
+  </div>
+  <div class="ui one column grid">
+    <div class="column">
+      <div class="ui raised segment">
+        <a class="ui red ribbon label" style="cursor: default;">Market place</a>
+      
+        <p></p>
+        
+      </div>
+    </div>
+   
+  </div>
+  <div class="row gy-5" style="visibility: hidden;">
+    <div class="col-6">
+      <div class="p-3">Custom column padding</div>
+    </div>
+  
+  </div>
+  
+  <div class="container text-center">
+   
+    <div class="row">
+      {% for yes in "yes" %}
+      <div class="col-sm">
+        <div class="ui red segment d-flex justify-content-center mb-3">
+
+        <div class="ui link cards">
+          <div class="card">
+            <div class="image">
+              <img src="https://semantic-ui.com/images/avatar2/large/elyse.png">
+            </div>
+            <div class="content">
+              <div class="header">Matt Giampietro</div>
+              <div class="meta">
+                <a>Friends</a>
+              </div>
+              <div class="description">
+                Matthew is an interior designer living in New York.
+              </div>
+            </div>
+            <div class="extra content">
+              <span class="right floated">
+                Joined in 2013
+              </span>
+              <span>
+                <i class="user icon"></i>
+                75 Friends
+              </span>
+            </div>
+          </div>
+      </div></div>
+      
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="row gy-5" style="visibility: hidden;">
+    <div class="col-6">
+      <div class="p-3">Custom column padding</div>
+    </div>
+  
+  </div>
+
+
+</div>
+<div class="ui one column grid">
+  <div class="column">
+    <div class="ui raised segment">
+      <a class="ui teal ribbon label" style="cursor: default;">Blog</a>
+    
+      <p></p>
+      
+    </div>
+  </div>
+ 
+</div>
+
+{% for a in blog_list %}
+{% include 'blog/list-inline.html' with blog_post=a truncate=True detail=False %}
+{% endfor %}
+
+ <div class="row gy-5" style="visibility: hidden;">
+    <div class="col-6">
+      <div class="p-3">Custom column padding</div>
+    </div>
+    <div class="col-6">
+      <div class="p-3">Custom column padding</div>
+    </div>
+   
+  
+  </div>
+  
+  <div class="container">
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    {% if blog_list.has_previous %}
+    <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
+    <li class="page-item"><a class="page-link" href="?page={{blog_list.previous_page_number}}">Previous</a></li>
+    {% endif %}
+    
+    {% if blog_list.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{blog_list.next_page_number}}">Next</a></li>
+    <li class="page-item">
+      <a class="page-link" href="?page={{blog_list.paginator.num_pages}}">Last &raquo;</a>
+    </li>
+    {% endif %}
+  </ul>
+  
+  <small class="text-white p-3">
+    Page {{blog_list.number}} of {{blog_list.paginator.num_pages}}.
+  </small>
+</nav>
+</div>
+
+{% endblock %}
