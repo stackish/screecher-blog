@@ -25,7 +25,7 @@ SECRET_KEY = 'nb7m1a2l))8cejip#*bwcr5pnkailc@ruvj@6eo(^dhu77$4+%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['screecherweb.up.railway.app','192.168.43.1','127.0.0.1']
+ALLOWED_HOSTS = ['screecher-blog-644561da5d94.herokuapp.com','192.168.43.1','127.0.0.1']
 
 
 # Application definition
