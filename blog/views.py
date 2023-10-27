@@ -180,24 +180,23 @@ def comment_view(request,slug):
 """
 
 @login_required
-def update_comment(request,slug,comment_id):
+def update_comment(request):
+	if request.method == 'POST':
+		comment = CommentSection.objects.get(id=request.POST.get('id'))
+		if comment != None:
+			
+			comment.comment = request.POST.get('comment')
+
+			comment.save()
+			slug=comment.blogpost.slug
+			update_comment_message = "Comment updated successfully!!!"
+			messages.add_message(request,messages.SUCCESS,update_comment_message)
+			return HttpResponseRedirect(reverse('detail',kwargs={'slug':slug}))
+			
 	
-	obj=get_object_or_404(BlogPost,slug=slug)
+
 	
 	
-	comment=obj.commentsection_set.get(c_id=comment_id)
-	
-	if comment.user != request.user:
-		raise Http404
-	form=CommentSectionModelForm(request.POST or None,instance=comment)
-	print(obj)
-	if form.is_valid():
-		
-		form.save()
-		return HttpResponseRedirect(reverse('comment',kwargs={'slug':slug}))
-	template_name="blog/update_comment.html"
-	context={'form':form,'comment':comment,'obj':obj}
-	return render(request,template_name,context)
 	
 	
 	

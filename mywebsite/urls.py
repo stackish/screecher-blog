@@ -17,7 +17,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path,include
 from django.contrib.auth import views as auth_views
-from blog.views import blog_post_create_view,profile
+from blog.views import blog_post_create_view,profile,update_comment
 from searches.views import search_view
 from account.views import CreateUser,CustomLoginView
 from human_resource import views
@@ -42,6 +42,7 @@ urlpatterns = [
 	path('blog/',include("blog.urls")),
 	path('search/',search_view,name="search"),
 	path('about/',about_page),
+    path('update_comment/',update_comment,name="update_comment"),
 	path('contact/',contact_page),
     path('admin/', admin.site.urls),
 

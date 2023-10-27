@@ -28,6 +28,7 @@
     </a>
     </div>
     {% endif %}
+    
     {% if truncate %}
     <div class="content" id="content">
       <a class="header text-white p-2 fs-4 titles text-decoration-none" style="color: #D9C179 !important;">{{blog_post.title|title}}</a>
@@ -55,7 +56,7 @@
 </div>
 
 
-
+<!-- this is for the detailed part -->
 {% else %}
 
     <div class="content" id="content">
@@ -88,14 +89,15 @@
         </div>
       </div>
       <!--segment-->
+    <!--Comment Section-->
 
-  <div class="extra text-white ">
+    <!-- create a comment -->
+<div class="extra text-white ">
        {% if request.user.is_authenticated %} 
        <div class="ui labeled button" tabindex="0" data-bs-toggle="modal"  data-bs-target="#exampleModal">
   <div class="ui teal button">
     <i class="fa-solid fa-comments"></i> Comment
   </div>
- 
 </div>
 
 <div class="ui labeled button" tabindex="0">
@@ -121,7 +123,7 @@
     {% else %}
 
 
-   
+   <!-- second comment section when the user isnt authenticated -->
     <div data-bs-toggle="modal"  data-bs-target="#authenticateModal" class="ui labeled button" tabindex="0" data-bs-toggle="modal"  data-bs-target="#exampleModal" style="cursor: pointer;">
   <div class="ui teal button">
     <i class="fa-solid fa-comments"></i> Comment
@@ -229,6 +231,8 @@
 </div>
 
  <!--modal end -->
+
+ <!--Comment section-->
 {% for comment in comment %}
       <div class="ui feed mb-4">
         <div class="event">
@@ -244,6 +248,7 @@
             </div>
             <div class="extra text text-white articles" style="text-align: justify; text-justify: inter-word;">
               {{comment.comment}}
+
             </div>
             <div class="meta">
               <a class="like text-white text-decoration-none">
@@ -254,8 +259,8 @@
               </a>
               {% if request.user == comment.user %}
              
-              <a class="like text-white text-decoration-none" href="#">
-                <i class="pencil alternate icon"></i> Edit
+              <a class="like text-white text-decoration-none">
+                <i class="pencil alternate icon" data-bs-toggle="modal" data-bs-target="#updateModal{{comment.id}}"></i> Edit
               </a>
               {% endif %}
             </div>
@@ -263,6 +268,48 @@
           </div>
       
       </div>
+
+
+<!-- comment Modal -->
+<div class="modal fade" id="updateModal{{comment.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 text-capitalize" id="exampleModalLabel">{{comment.user.get_full_name|capfirst}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form method="POST" autocomplete="off" action="{% url 'update_comment' %}">
+        {% csrf_token %}
+      <div class="modal-body  text-center">
+        <span class="card p-2 bg-primary text-center text-light mb-3" style="width: 100%;font-size: 14px;">
+          {% now "m/d/Y (H:i)" %}
+          </span>
+<!--ID Hidden-->
+<input type="hidden" name="id" value="{{comment.id}}" readonly >
+<input type="hidden" name="blogpost" value="{{comment.blogpost}}" readonly >
+<input type="hidden" name="user" value="{{comment.user}}" readonly >
+
+<!--Comment-->
+
+<div class="form-group">
+  <textarea name="comment" id="comment" maxlength="1000" class="form-control" placeholder="Your text here." rows="10" required>{{comment.comment}}</textarea>
+</div>
+
+
+
+
+      </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+
+    </form>
+    </div>
+  </div>
+</div>
+
+
       {% endfor %}
       <div class="container overflow-hidden text-center" style="visibility:hidden;">
         <div class="row gy-5">
@@ -329,3 +376,8 @@ List of users that like a post -->
 
 
 <span class="text-danger" id="no-data"></span>
+
+
+
+
+
