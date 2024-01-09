@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'bootstrap5',
     'fontawesomefree',
     "corsheaders",
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
@@ -161,6 +162,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'staticfiles')
 ] 
 STATIC_ROOT =os.path.join(BASE_DIR,'static_cdn_test')
+
 MEDIA_ROOT=os.path.join(BASE_DIR,'mediafiles')
 
 #MEDIA_ROOT = os.path.join(LOCAL_STATIC_CDN_PATH, 'media')
